@@ -1,0 +1,14 @@
+{% extends 'book/main.html' %}
+{% load static %}
+{% block content %}
+  <div class="bg-FFD498">
+    <form class="d-flex p-2 justify-content-center align-items-center flex-column row m-0" method="POST">
+      {% csrf_token %}
+      {{ formset.management_form }}
+      {% for item in formset %}
+        {{ item }}
+      {% endfor %}
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+{% endblock %}

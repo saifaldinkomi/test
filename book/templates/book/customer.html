@@ -1,0 +1,55 @@
+{% extends 'book/main.html' %}
+{% block content %}
+  <div class="container">
+    <div class="row my-3">
+      <div class="col">{{ customer.name }}</div>
+      <div class="col">{{ customer.age }}</div>
+      <div class="col">{{ customer.email }}</div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <div class="bg-FFD498">
+          <form class="d-flex p-2 justify-content-center align-items-center flex-column row m-0" method="GET">
+            {% csrf_token %}
+            {{ searchFilter.form }}
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <a href="{% url 'createOrders' customer.id %}">create</a>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">book</th>
+        <th scope="col">customer</th>
+        <th scope="col">status</th>
+        <th scope="col">data_created</th>
+        <th scope="col">tag</th>
+        <th>action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for index in orders %}
+        <tr>
+          <th>{{ index.book }}</th>
+          <td>{{ index.customer }}</td>
+          <td>{{ index.status }}</td>
+          <td>{{ index.data_created }}</td>
+          <td>
+            {% for item in index.tag.all %}
+              {{ item.name }}
+            {% endfor %}
+          </td>
+          <td>
+            <i class="fa-solid fa-trash text-primary"></i>
+            <i class="fa-solid fa-pen text-danger"></i>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

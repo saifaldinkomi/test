@@ -1,0 +1,13 @@
+* {
+    text-transform: capitalize;
+    list-style: none;
+}
+
+.bg-navbar {
+    background-color: red;
+}
+
+.bg-green {
+    color: green;
+}
+

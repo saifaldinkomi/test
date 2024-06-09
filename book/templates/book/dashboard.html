@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    {% extends 'book/main.html' %}
+    {% block content %}
+      <table class="table">
+        <h1>orders</h1>
+        <a role="button" class="btn btn-success" href="{% url 'create' %}">create</a>
+        <thead>
+          <tr>
+            <th scope="col">book</th>
+            <th scope="col">customer</th>
+            <th scope="col">status</th>
+            <th scope="col">data_created</th>
+            <th scope="col">tag</th>
+            <th>action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for index in orders %}
+            <tr>
+              <th>{{ index.book }}</th>
+              <td>{{ index.customer }}</td>
+              <td>{{ index.status }}</td>
+              <td>{{ index.data_created }}</td>
+              <td>
+                {% for item in index.tag.all %}
+                  {{ item.name }}
+                {% endfor %}
+              </td>
+              <td>
+                <a href="{% url 'update' index.id %}"><i class="fa-solid fa-pen "></i></a>
+               <a href="{% url 'delete' index.id %}"><i class="fa-solid fa-trash text-primary"></i></a>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+      <table class="table">
+        <h1>customer</h1>
+
+        <thead>
+          <tr>
+            <th scope="col">name</th>
+            <th scope="col">email</th>
+            <th scope="col">age</th>
+            <th scope="col">data_created</th>
+            <th>action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for index in customers %}
+            <tr>
+              <th>{{ index.name }}</th>
+              <td>{{ index.email }}</td>
+              <td>{{ index.age }}</td>
+              <td>{{ index.data_created }}</td>
+              <td>
+                <a href="{% url 'customer' index.id %}"><i class="fa-solid fa-eye"></i></a>
+                <i class="fa-solid fa-pen text-danger"></i>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% endblock %}
+  </body>
+</html>

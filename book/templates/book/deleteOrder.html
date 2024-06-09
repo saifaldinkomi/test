@@ -1,0 +1,12 @@
+{% extends 'book/main.html' %}
+{% load static %}
+{% block content %}
+  <div class="bg-FFD498">
+    <form method="POST">
+      {% csrf_token %}
+     <h1>are you sure delete</h1>
+     <a href="{% url "home" %}">no</a>
+      <button type="submit" class="btn btn-primary">yes</button>
+    </form>
+  </div>
+{% endblock %}
